@@ -1,0 +1,88 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: #f7f1f1;
+}
+.content {
+    padding: 30px;
+}
+.content .hd {
+    padding: 20px 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+.content .hd h2 {
+    margin: 0;
+    padding: 0;
+}
+.content .bd {
+    padding: 20px 15px;
+    font-size: 12px;
+}
+.content .bd .control {
+    margin-bottom: 20px;
+}
+.content .bd .control::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+.content .bd .control label {
+    float: left;
+    padding-right: 15px;
+}
+.content .bd .control .display {
+    float: left;
+}
+.content .tm {
+    max-width: 600px;
+    padding: 15px 20px;
+    border: 1px solid #65b19c;
+    border-radius: 5px;
+    background: #f4fffd;
+}
+.content .tm > div {
+    margin-bottom: 15px;
+}
+
+.content .tm .label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #00c3f7;
+}
+
+.content .basecode {
+    padding-right: 50px;
+    position: relative;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 30px;
+    line-height: 30px;
+}
+.content .copy {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.content .copy button {
+    border-radius: 4px;
+    padding: 3px 10px;
+    border-color: #4db4c5;
+    background: #4db4c5;
+    color: #fff;
+}
+.content .copy button:focus,
+.content .copy button:checked {
+    outline: 0 none;
+}
+.content .image {
+    overflow: auto;
+}
+.content .image img {
+    max-width: 500px;
+    max-height: 500px;
+}
+.content .image button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}

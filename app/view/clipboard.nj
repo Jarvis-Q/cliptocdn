@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/clipboard.css" />
+    <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
+</head>
+<body>
+    <div class="content">
+        <div class="hd">
+            <h2>读取剪贴板内容(ctrl+v or command + v)</h2>
+        </div>
+        <div class="bd">
+            <div class="control">
+                <label for="">类型:</label>
+                <div class="display" id="J_Type"></div>
+            </div>
+            <div class="control">
+                <label for="">内容:</label>
+                <div class="display" id="J_Display"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/template" id="J_Template">
+        <div class="tm">
+            <div>
+                <span class="label">base64:</span>
+                <div class="basecode">
+                    <span id="J_ContentCopying">##imgBase64##</span>
+                    <div class="copy">
+                        <button type="button" id="J_Copy">复制</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <span class="label">预览图:</span>
+                <div class="image">
+                    <img src=##imgBase64## />
+                    <div>
+                        {% if hideboss %}
+                        <button type="button" id="J_Upload">压缩并上传到cdn</button>
+                        <p class="cdnlink" id="J_CdnLink"></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript" src="/public/js/clipboard.js"></script>
+</body>
+</html>
