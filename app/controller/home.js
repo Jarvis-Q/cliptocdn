@@ -87,27 +87,38 @@ class HomeController extends Controller {
   async clipboardUpload () {
     const { ctx, app } = this;
     const file = ctx.request.files[0];
-    // const name = 'clipboard-image/' + path.basename(file.filename);
-    tinify.key = app.config.tinify.key;
+    // tinify.key = app.config.tinify.key;
     // 计算文件名hash值
     const fileType = path.extname(file.filename);
     const key = getHashOfFile(file.filepath) + fileType;
-    const tmpfile = path.join(app.baseDir, '/app/public/' + key + fileType);
+    const tmpfile = path.join(app.baseDir, key);
 
-    tinify.fromFile(file.filepath).toFile(tmpfile);
-    
-    let result;
-    try {
-      result = await qiniuOssUpload(key, tmpfile, app.config.qiniu.ossAK, app.config.qiniu.ossSK)
-    } finally {
-      // await fs.unlink(tmpfile);
-      await fs.unlink(file.filepath);
+    // ctx.service.tinify.setKey(app.config.tinify.key);
+    let isValid = await ctx.service.tinify.validate(app.config.tinify.key);
+    if (isValid) {
+      await ctx.service.tinify.compress(file.filepath, tmpfile);
+      // tinify.fromFile(file.filepath).toFile(function());
+      
+      let result;
+      try {
+        result = await qiniuOssUpload(key, tmpfile, app.config.qiniu.ossAK, app.config.qiniu.ossSK)
+      } finally {
+        await fs.unlink(tmpfile);
+        await fs.unlink(file.filepath);
+      }
+  
+      ctx.body = {
+        data: result.body.key || null,
+        message: result.status === 200 ? 'ok' : result.body.error,
+        status: result.status
+      }
+    } else {
+      ctx.body = {
+        data: '图片资源本日已用尽',
+        status: 10001
+      }
     }
 
-    ctx.body = {
-      data: result.body.key,
-      status: result.status
-    }
   }
 }
 

@@ -74,7 +74,7 @@ $(function() {
                     var cdnPrefix = `http://imgstore.zuimo.me/${result.data}`
                     $('#J_CdnLink').text(cdnPrefix);
                 } else {
-                    $('#J_CdnLink').text('上传失败');
+                    $('#J_CdnLink').text(result.message || '上传失败');
                     console.log(result);
                 }
             }
